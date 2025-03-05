@@ -1,50 +1,84 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的导航页</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Start</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>📚 我的收藏夹</h1>
-    </header>
-    
-    <div class="container">
-        <!-- 分类1：开发工具 -->
-        <section class="category">
-            <h2>💻 开发工具</h2>
-            <div class="links">
-                <a href="https://github.com" target="_blank" class="card">
-                    <h3>GitHub</h3>
-                    <p>代码托管平台</p>
-                </a>
-                <a href="https://codepen.io" target="_blank" class="card">
-                    <h3>CodePen</h3>
-                    <p>前端代码实验平台</p>
-                </a>
-            </div>
-        </section>
+    <div class="page-container">
+        <!-- 时间和天气组件 -->
+        <div class="info">
+            <div id="time" class="info-date-time"></div>
+            <!-- <div id="weather" class="info-weather"></div> -->
+        </div>
 
-        <!-- 分类2：学习资源 -->
-        <section class="category">
-            <h2>📖 学习资源</h2>
-            <div class="links">
-                <a href="https://zh.javascript.info" target="_blank" class="card">
-                    <h3>现代 JavaScript 教程</h3>
-                    <p>优质的JS学习资源</p>
-                </a>
-                <a href="https://leetcode.cn" target="_blank" class="card">
-                    <h3>LeetCode</h3>
-                    <p>算法练习平台</p>
-                </a>
+        <!-- 搜索栏 -->
+        <div id="search-bar">
+            <div id="search-engine">
+                <img id="engine-icon" src="./ico/google_engine.png"/>
             </div>
-        </section>
+           
+            <input type="text" id="search-input" placeholder="输入搜索内容...">
+            <button id="search-btn">搜索</button>
+        </div>
+
+        <!-- 常用网页 -->
+        <div id="jump-list">
+            
+            <div class="jump-object" onclick="window.location.href='https://www.bilibili.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/bilibili.ico" alt="Bilibili" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Bilibili</span>
+            </div>
+            <div class="jump-object" onclick="window.location.href='https://www.bilibili.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/github.ico" alt="Github" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Github</span>
+            </div>
+            <div class="jump-object" onclick="window.location.href='https://chat.deepseek.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/deepseek.ico" alt="Deepseek" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Deepseek</span>
+            </div>
+            <div class="jump-object" onclick="window.location.href='https://www.bing.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/bing.ico" alt="Bing" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Bing</span>
+            </div>
+            <div class="jump-object" onclick="window.location.href='https://chatgpt.com'">
+                <div class="jump-object-icon">
+                    <img id="icon"  src="./ico/chatgpt.ico" alt="Chatgpt" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Chatgpt</span>
+            </div>
+            <div class="jump-object" onclick="window.location.href='https://www.google.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/google.ico" alt="Google" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Google</span>
+            </div>
+            <div class="jump-object" onclick="window.location.href='https://www.bing.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/youtube.ico" alt="Youtube" draggable="false" /> 
+                </div>
+                <span class="jump-object-name">Youtube</span>
+            </div>
+        </div>
+        
+       
+
+    </div>
+    <div class="page-footer">
+         <!-- 收藏夹 -->
+
     </div>
 
-    <footer>
-        <p>🛠 由 GitHub Pages 驱动 | 更新于 2023.11</p>
-    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
