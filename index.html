@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+    <div id="page-background"></div>
     <div class="page-container">
         <!-- 时间和天气组件 -->
         <div class="info">
@@ -17,68 +20,73 @@
         <!-- 搜索栏 -->
         <div id="search-bar">
             <div id="search-engine">
-                <img id="engine-icon" src="./ico/google_engine.png"/>
+                <img id="engine-icon" src="./ico/google_engine.png" />
             </div>
-           
-            <input type="text" id="search-input" placeholder="输入搜索内容...">
+
+            <input type="search" id="search-input" placeholder="输入搜索内容...">
             <button id="search-btn">搜索</button>
         </div>
 
         <!-- 常用网页 -->
         <div id="jump-list">
-            
+            <a class="jump-object" onclick="window.location.href='https://www.baidu.com'">
+                <div class="jump-object-icon">
+                    <img id="icon" src="./ico/bilibili.ico" alt="Bilibili" draggable="false" />
+                </div>
+                <span class="jump-object-name">Bilibili</span>
+            </a>
+
             <div class="jump-object" onclick="window.location.href='https://www.bilibili.com'">
                 <div class="jump-object-icon">
-                    <img id="icon" src="./ico/bilibili.ico" alt="Bilibili" draggable="false" /> 
+                    <img id="icon" src="./ico/bilibili.ico" alt="Bilibili" draggable="false" />
                 </div>
                 <span class="jump-object-name">Bilibili</span>
             </div>
             <div class="jump-object" onclick="window.location.href='https://www.bilibili.com'">
                 <div class="jump-object-icon">
-                    <img id="icon" src="./ico/github.ico" alt="Github" draggable="false" /> 
+                    <img id="icon" src="./ico/github.ico" alt="Github" draggable="false" />
                 </div>
                 <span class="jump-object-name">Github</span>
             </div>
             <div class="jump-object" onclick="window.location.href='https://chat.deepseek.com'">
                 <div class="jump-object-icon">
-                    <img id="icon" src="./ico/deepseek.ico" alt="Deepseek" draggable="false" /> 
+                    <img id="icon" src="./ico/deepseek.ico" alt="Deepseek" draggable="false" />
                 </div>
                 <span class="jump-object-name">Deepseek</span>
             </div>
             <div class="jump-object" onclick="window.location.href='https://www.bing.com'">
                 <div class="jump-object-icon">
-                    <img id="icon" src="./ico/bing.ico" alt="Bing" draggable="false" /> 
+                    <img id="icon" src="./ico/bing.ico" alt="Bing" draggable="false" />
                 </div>
                 <span class="jump-object-name">Bing</span>
             </div>
             <div class="jump-object" onclick="window.location.href='https://chatgpt.com'">
                 <div class="jump-object-icon">
-                    <img id="icon"  src="./ico/chatgpt.ico" alt="Chatgpt" draggable="false" /> 
+                    <img id="icon" src="./ico/chatgpt.ico" alt="Chatgpt" draggable="false" />
                 </div>
                 <span class="jump-object-name">Chatgpt</span>
             </div>
             <div class="jump-object" onclick="window.location.href='https://www.google.com'">
                 <div class="jump-object-icon">
-                    <img id="icon" src="./ico/google.ico" alt="Google" draggable="false" /> 
+                    <img id="icon" src="./ico/google.ico" alt="Google" draggable="false" />
                 </div>
                 <span class="jump-object-name">Google</span>
             </div>
             <div class="jump-object" onclick="window.location.href='https://www.bing.com'">
                 <div class="jump-object-icon">
-                    <img id="icon" src="./ico/youtube.ico" alt="Youtube" draggable="false" /> 
+                    <img id="icon" src="./ico/youtube.ico" alt="Youtube" draggable="false" />
                 </div>
                 <span class="jump-object-name">Youtube</span>
             </div>
         </div>
-        
-       
-
-    </div>
-    <div class="page-footer">
-         <!-- 收藏夹 -->
 
     </div>
 
+    <!-- 收藏夹 -->
+    <div id="folders-container"></div>
+    <script src="background.js"></script>
+    <script src="folders.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

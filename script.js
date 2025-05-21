@@ -17,14 +17,20 @@ function updateTime() {
     timeElement.innerHTML = `<div class="datetime-time">${currentTime}</div><div class="datetime-date">${currentDate}</div>`;
 }
 
+
+console.log("?")
 //收藏夹
 // 使用fetch加载导出的HTML文件
 function bookmarks() {
+    console.log("1")
     fetch('./favorites.html')
         .then(response => response.text())
         .then(html => {
+            console.log("2")
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
+
+            console.log(doc)
 
             // 提取所有的<A>标签
             const links = doc.querySelectorAll('a');
@@ -46,6 +52,9 @@ function bookmarks() {
         })
         .catch(error => console.error('Error loading bookmarks:', error));
 }
+
+console.log("?")
+bookmarks()
 
 
 // 搜索功能
@@ -72,8 +81,8 @@ document.getElementById('search-btn').addEventListener('click', function () {
 });
 
 // 页面加载时更新时间和天气
-window.onload = function () {
-    updateTime();
-    updateWeather();
-    setInterval(updateTime, 60000);  // 每分钟更新一次时间
-};
+// window.onload = function () {
+//     updateTime();
+//     updateWeather();
+//     setInterval(updateTime, 60000);  // 每分钟更新一次时间
+// };
