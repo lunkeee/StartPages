@@ -1,54 +1,100 @@
-// 定义文件夹数据
-const foldersData = {
-    "INTERNET": [
-        { name: "GameRes游资网", url: "https://www.gameres.com/" },
-        { name: "3DMGAME_中国单机游戏论坛", url: "https://bbs.3dmgame.com/forum.php" },
-        { name: "中国国家地理网", url: "http://www.dili360.com/" },
-        { name: "中舞网", url: "https://www.dance365.com/index/recommend" }
-    ],
-    "WEB": [
-        { name: "DeepSeek - 探索未至之境", url: "https://chat.deepseek.com/a/chat/s/07e61861-a4cc-4690-9f4b-51c419eb558b" },
-        { name: "GitHub", url: "https://github.com/" },
-        { name: "YouTube", url: "https://www.youtube.com/" },
-        { name: "微信公众平台", url: "https://mp.weixin.qq.com/cgi-bin/loginpage?url=%2Fcgi-bin%2Fhome%3Ftoken%3D889279717" }
-    ],
-    "DOCS": [
-        { name: "系统架构 · 野火IM 产品介绍", url: "https://docs.wildfirechat.cn/architecture/" },
-        { name: "API 文档 | Ping++", url: "https://www.pingxx.com/api/Users%20%E7%94%A8%E6%88%B7%E6%A6%82%E8%BF%B0.html" },
-        { name: "Scratchapixel 4.0, Learn Computer Graphics Programming", url: "https://www.scratchapixel.com/" }
-    ]
-};
+// 读取同目录文件下的favorites.html 解析收藏夹内容
+async function parseBookmarksFromFile() {
+    try {
+        // 1. 获取 favorites.html 文件内容
+        const response = await fetch('favorites.html');
+        const htmlString = await response.text();
 
-// 获取容器
-const foldersContainer = document.getElementById('folders-container');
+        // 2. 创建 DOM 解析器
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(htmlString, 'text/html');
 
-// 遍历数据并生成文件夹和链接
-for (const [folderName, links] of Object.entries(foldersData)) {
-    // 创建文件夹容器
-    const folderDiv = document.createElement('div');
-    folderDiv.className = 'folder';
+        const result = {};
 
-    // 创建文件夹按钮
-    const folderButton = document.createElement('button');
-    folderButton.className = 'folder-btn';
-    folderButton.textContent = folderName;
-    folderDiv.appendChild(folderButton);
+        // 3. 获取所有H3标签（分类标题）
+        const categories = doc.querySelectorAll('h3');
 
-    // 创建下拉菜单
-    const folderContent = document.createElement('div');
-    folderContent.className = 'folder-content';
+        categories.forEach(category => {
+            const categoryName = category.textContent;
+            if (categoryName === '收藏夹栏') {
+                return;
+            }
+            result[categoryName] = [];
 
-    // 添加链接到下拉菜单
-    links.forEach(link => {
-        const linkElement = document.createElement('a');
-        linkElement.href = link.url;
-        linkElement.textContent = link.name;
-        folderContent.appendChild(linkElement);
-    });
+            // 4. 获取当前分类下的所有链接
+            const dl = category.nextElementSibling;
+            if (dl && dl.tagName === 'DL' && dl.textContent !== '收藏夹栏') {
+                const links = dl.querySelectorAll('a');
 
-    // 将下拉菜单添加到文件夹容器
-    folderDiv.appendChild(folderContent);
+                links.forEach(link => {
+                    result[categoryName].push({
+                        name: link.textContent,
+                        url: link.getAttribute('href'),
+                        icon: link.getAttribute('ICON') || '' // 注意属性名是大写的 ICON
+                    });
+                });
+            }
+        });
 
-    // 将文件夹添加到页面容器
-    foldersContainer.appendChild(folderDiv);
+        return result;
+
+    } catch (error) {
+        console.error('Error parsing bookmarks:', error);
+        return {};
+    }
 }
+
+// 渲染书签到页面
+function renderBookmarks(foldersData) {
+    // 获取容器
+    const foldersContainer = document.getElementById('folders-container');
+
+    // 遍历数据并生成文件夹和链接
+    for (const [folderName, links] of Object.entries(foldersData)) {
+        // 创建文件夹容器
+        const folderDiv = document.createElement('div');
+        folderDiv.className = 'folder';
+
+        // 创建文件夹按钮
+        const folderButton = document.createElement('button');
+        folderButton.className = 'folder-btn';
+        folderButton.textContent = folderName;
+        folderDiv.appendChild(folderButton);
+
+        // 创建下拉菜单
+        const folderContent = document.createElement('div');
+        folderContent.className = 'folder-content';
+
+        // 添加链接到下拉菜单
+        links.forEach(link => {
+            const linkElement = document.createElement('a');
+            linkElement.href = link.url;
+            linkElement.textContent = link.name;
+            folderContent.appendChild(linkElement);
+        });
+
+        // 将下拉菜单添加到文件夹容器
+        folderDiv.appendChild(folderContent);
+
+        // 将文件夹添加到页面容器
+        foldersContainer.appendChild(folderDiv);
+    }
+}
+
+// 主执行流程
+(async function() {
+    console.log("hello");
+    
+    try {
+        // 解析书签文件
+        const bookmarks = await parseBookmarksFromFile();
+        
+        // 打印结果
+        console.log('Extracted bookmarks:', bookmarks);
+        
+        // 渲染书签到页面
+        renderBookmarks(bookmarks);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+})();

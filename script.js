@@ -59,7 +59,8 @@ bookmarks()
 
 // 搜索功能
 document.getElementById('search-btn').addEventListener('click', function () {
-    const searchEngine = document.getElementById('search-engine').value;
+    const searchEngine = 'baidu';
+    // const searchEngine = document.getElementById('search-engine').value;
     const searchQuery = document.getElementById('search-input').value;
     let searchUrl = '';
 
